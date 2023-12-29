@@ -1,8 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import {
-  UserAddOutlined,
-} from "@ant-design/icons";
+import { UserAddOutlined } from "@ant-design/icons";
 import {
   Layout,
   Button,
@@ -16,24 +14,25 @@ import {
   Table,
 } from "antd";
 import { MdOutlineDelete } from "react-icons/md";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "@/redux/store/store";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/redux/store/store";
 import { fetchStock } from "@/redux/slicers/getStock";
-import addStockItem from "@/redux/slicers/addStockItem";
 import { FaRegEdit } from "react-icons/fa";
-
+import instance from "@/app/api/api_instance";
+import Cookies from "universal-cookie";
+import axios from "axios";
 const { Header, Sider, Content } = Layout;
 
 const IncomeAdd: React.FC = () => {
+  // GET X-CSRFtoken
+  const c = new Cookies(null, { path: "/" });
+  // console.log(c.get("csrftoken"));
+
   // // FETCHING API
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
     dispatch(fetchStock());
   }, []);
-  useSelector((state: RootState) => state.addStockItem?.data);
-  const stockData = useSelector(
-    (state: RootState) => state.getStock?.data.results
-  );
 
   // STATES
   const [loading, setLoading] = useState(false);
@@ -94,9 +93,24 @@ const IncomeAdd: React.FC = () => {
   function postProduct() {
     setMaterials([...materials, { ...form.incoming_materials }]);
   }
-  console.log(materials);
-  function postItem() {
-    dispatch(addStockItem(form));
+  async function postItem() {
+    try {
+      const response = await axios.post(
+        "https://multisystem.pythonanywhere.com/api/depo/incoming/create/",
+        {
+          data: form,
+          headers: {
+            'Referer':
+              "https://multisystem.pythonanywhere.com/api/depo/incoming/create/",
+            "Content-Type": "x-www-form-urlencoded",
+          },
+        }
+      );
+      const result = await response.data;
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   const headers = [

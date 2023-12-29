@@ -6,12 +6,14 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 export const addStockItem = createAsyncThunk(
   "warehouse/stock/add",
   async (product: any) => {
-    const response = await instance("/depo/incoming/create", product);
+    const response = await instance("/depo/incoming/create", {
+      data: product,
+    });
     return response.data;
   }
 );
 
-const initialState: any = {
+const initialState: initialStateType = {
   loading: false,
   data: [],
   error: null,
@@ -26,10 +28,10 @@ const addStockItemSlice = createSlice({
       .addCase(addStockItem.pending, (state) => {
         state.loading = true;
       })
-      // .addCase(addStockItem.fulfilled, (state, action) => {
-      //   state.loading = false;
-      //   state.data = action.payload;
-      // })
+      .addCase(addStockItem.fulfilled, (state, action) => {
+        state.loading = false;
+        state.data = action.payload;
+      })
       .addCase(addStockItem.rejected, (state) => {
         state.loading = false;
         console.log(3232);

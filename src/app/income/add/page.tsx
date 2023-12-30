@@ -96,16 +96,7 @@ const IncomeAdd: React.FC = () => {
   async function postItem() {
     try {
       const response = await axios.post(
-        "https://multisystem.pythonanywhere.com/api/depo/incoming/create/",
-        {
-          data: form,
-          headers: {
-            'Referer':
-              "https://multisystem.pythonanywhere.com/api/depo/incoming/create/",
-            "Content-Type": "x-www-form-urlencoded",
-          },
-        }
-      );
+        "https://multisystem.pythonanywhere.com/api/depo/incoming/create", form);
       const result = await response.data;
       console.log(result);
     } catch (error) {

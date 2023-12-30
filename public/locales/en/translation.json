@@ -1,0 +1,10 @@
+{
+  "sidebar": {
+    "home": "home",
+    "warehouse": "warehouse",
+    "staff": "staff",
+    "income": "income",
+    "outcome": "outcome",
+    "info": "info"
+  }
+}

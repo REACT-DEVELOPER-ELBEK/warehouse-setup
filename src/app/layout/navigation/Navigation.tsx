@@ -1,26 +1,19 @@
 "use client";
-import Info from "@/app/info/brand/page";
 import { getCookie, setCookie } from "@/app/utils/cookies";
 import { selectedPageState } from "@/types/selectedPage.type";
-import {
-  ContactsOutlined,
-  HomeFilled,
-  InboxOutlined,
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-} from "@ant-design/icons";
-import { Button, Dropdown, Layout, Menu, MenuProps, theme } from "antd";
+import { ContactsOutlined, HomeFilled, InboxOutlined } from "@ant-design/icons";
+import { Dropdown, Layout, Menu, MenuProps, theme } from "antd";
 import Sider from "antd/es/layout/Sider";
-import { Content, Header } from "antd/es/layout/layout";
 import Link from "next/link";
 import { useState } from "react";
 import React from "react";
 import { FaCircleInfo } from "react-icons/fa6";
 import { GiPayMoney, GiReceiveMoney } from "react-icons/gi";
-import { MdAccountCircle } from "react-icons/md";
+import i18n from "@/app/language/i18next";
+import { useTranslation } from "react-i18next";
 
 const Navigation: React.FC = () => {
-  const token = getCookie('csrftoken')
+  const { t } = useTranslation();
   const infoItemsArray = [
     { name: "brand", nameRu: "бренды" },
     { name: "currency", nameRu: "валюта" },
@@ -40,7 +33,7 @@ const Navigation: React.FC = () => {
   setCookie("info_page_name", JSON.stringify(selectedPage));
 
   const items: MenuProps["items"] = infoItemsArray.map(
-    ({ name, nameRu }, index: number) => ({
+    ({ name }, index: number) => ({
       key: index,
       label: (
         <Link
@@ -48,7 +41,7 @@ const Navigation: React.FC = () => {
           type="text"
           style={{ textTransform: "capitalize", width: "100%" }}
         >
-          {nameRu}
+          {name}
         </Link>
       ),
     })
@@ -68,7 +61,6 @@ const Navigation: React.FC = () => {
       >
         <div className="demo-logo-vertical" />
         <Menu
-      
           theme="dark"
           mode="inline"
           defaultSelectedKeys={["1"]}
@@ -76,7 +68,7 @@ const Navigation: React.FC = () => {
             {
               key: "home",
               icon: <HomeFilled />,
-              label: <Link href="/">Главная</Link>,
+              label: <Link href="/">{t("sidebar.home")}</Link>,
             },
             {
               key: "warehouse",
@@ -102,9 +94,19 @@ const Navigation: React.FC = () => {
               key: "info",
               icon: <FaCircleInfo />,
               label: (
-                <Dropdown trigger={['click']} menu={{ items }} placement="top">
+                <Dropdown trigger={["click"]} menu={{ items }} placement="top">
                   <Link href="#">Информация</Link>
                 </Dropdown>
+              ),
+            },
+            {
+              key: "language",
+              label: (
+                <select onChange={(e) => i18n.changeLanguage(e.target.value)} defaultValue={localStorage.getItem('lang')!}>
+                  <option value="uz">UZ</option>
+                  <option value="ru">RU</option>
+                  <option value="en">EN</option>
+                </select>
               ),
             },
           ]}

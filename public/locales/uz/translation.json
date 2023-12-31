@@ -6,6 +6,17 @@
       "income": "daromad",
       "outcome": "sarflangan",
       "info": "ma'lumot"
+    },
+    "sidebar_info_components": {
+      "brand": "brend",
+      "currency": "valyuta",
+      "dealer": "diler",
+      "device": "loyiha",
+      "firm": "firma",
+      "material": "materiallar",
+      "specification": "xususiyatlar",
+      "unit": "birliklar",
+      "warehouse": "sklad"
     }
   }
   

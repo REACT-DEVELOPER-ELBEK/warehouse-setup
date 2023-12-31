@@ -6,5 +6,16 @@
     "income": "income",
     "outcome": "outcome",
     "info": "info"
+  },
+  "sidebar_info_components": {
+    "brand": "brand",
+    "currency": "currency",
+    "dealer": "dealer",
+    "device": "device",
+    "firm": "firm",
+    "material": "materials",
+    "specification": "specification",
+    "unit": "unit",
+    "warehouse": "warehouse"
   }
 }

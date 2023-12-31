@@ -2,7 +2,7 @@
 import { getCookie, setCookie } from "@/app/utils/cookies";
 import { selectedPageState } from "@/types/selectedPage.type";
 import { ContactsOutlined, HomeFilled, InboxOutlined } from "@ant-design/icons";
-import { Dropdown, Layout, Menu, MenuProps, theme } from "antd";
+import { Dropdown, Layout, Menu, MenuProps, Select, theme } from "antd";
 import Sider from "antd/es/layout/Sider";
 import Link from "next/link";
 import { useState } from "react";
@@ -41,7 +41,7 @@ const Navigation: React.FC = () => {
           type="text"
           style={{ textTransform: "capitalize", width: "100%" }}
         >
-          {name}
+          {t(`sidebar_info_components.${name}`)}
         </Link>
       ),
     })
@@ -73,36 +73,39 @@ const Navigation: React.FC = () => {
             {
               key: "warehouse",
               icon: <InboxOutlined />,
-              label: <Link href="/warehouse">Склад</Link>,
+              label: <Link href="/warehouse">{t("sidebar.warehouse")}</Link>,
             },
             {
               key: "staff",
               icon: <ContactsOutlined />,
-              label: <Link href="/staff">Персонал</Link>,
+              label: <Link href="/staff">{t("sidebar.staff")}</Link>,
             },
             {
               key: "income",
               icon: <GiReceiveMoney />,
-              label: <Link href="/income">Приход</Link>,
+              label: <Link href="/income">{t("sidebar.income")}</Link>,
             },
             {
               key: "outcome",
               icon: <GiPayMoney />,
-              label: <Link href="/outcome">Расход</Link>,
+              label: <Link href="/outcome">{t("sidebar.outcome")}</Link>,
             },
             {
               key: "info",
               icon: <FaCircleInfo />,
               label: (
                 <Dropdown trigger={["click"]} menu={{ items }} placement="top">
-                  <Link href="#">Информация</Link>
+                  <Link href="#">{t("sidebar.info")}</Link>
                 </Dropdown>
               ),
             },
             {
               key: "language",
               label: (
-                <select onChange={(e) => i18n.changeLanguage(e.target.value)} defaultValue={localStorage.getItem('lang')!}>
+                <select
+                  onChange={(e:any) => i18n.changeLanguage(e.target.value)}
+                  defaultValue={localStorage.getItem("lang")!}
+                >
                   <option value="uz">UZ</option>
                   <option value="ru">RU</option>
                   <option value="en">EN</option>

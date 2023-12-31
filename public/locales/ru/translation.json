@@ -6,6 +6,17 @@
       "income": "доход",
       "outcome": "расход",
       "info": "информация"
+    },
+    "sidebar_info_components": {
+      "brand": "бренд",
+      "currency": "валюта",
+      "dealer": "дилер",
+      "device": "средство",
+      "firm": "фирма",
+      "material": "материалы",
+      "specification": "характеристики",
+      "unit": "единицы",
+      "warehouse": "склад"
     }
   }
   
